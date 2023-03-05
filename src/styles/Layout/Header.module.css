@@ -1,0 +1,22 @@
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 5rem;
+	background-color: rgb(116, 17, 116);
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 99;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.header h1 {
+	margin-left: 10%;
+}
+
+.header button {
+	margin-right: 10%;
+}
