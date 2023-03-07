@@ -1,0 +1,30 @@
+.meal-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid #b1afaf;
+}
+
+.meal-text {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	text-align: start;
+	margin: 0 1rem;
+}
+
+.meal-text h3 {
+	color: purple;
+}
+
+.meal-description {
+	font-size: large;
+	font-style: oblique;
+	text-shadow: 0.5px 0.5px 1px gray;
+}
+
+.meal-price {
+	font-weight: 300;
+}
