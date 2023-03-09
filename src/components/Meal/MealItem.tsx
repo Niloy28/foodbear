@@ -2,6 +2,7 @@ import React from "react";
 import Meal from "../../types/Meal";
 
 import styles from "../../styles/Meal/MealItem.module.css";
+import MealItemForm from "./MealItemForm";
 
 const MealItem: React.FC<Meal> = (props) => {
 	return (
@@ -12,6 +13,9 @@ const MealItem: React.FC<Meal> = (props) => {
 					{props.description}
 				</section>
 				<div className={styles["meal-price"]}>${props.price.toFixed(2)}</div>
+			</div>
+			<div>
+				<MealItemForm />
 			</div>
 		</li>
 	);

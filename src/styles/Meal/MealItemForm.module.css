@@ -1,0 +1,21 @@
+.meal-form {
+	text-align: center;
+}
+
+.meal-form button {
+	cursor: pointer;
+	font-size: large;
+	font-weight: bold;
+	background-color: purple;
+	color: white;
+	padding: 0.25rem 1rem;
+	border-radius: 16px;
+}
+
+.meal-form button:hover {
+	background-color: rgb(160, 0, 160);
+}
+
+.meal-form button:active {
+	background-color: rgb(90, 0, 90);
+}
