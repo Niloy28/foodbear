@@ -28,3 +28,8 @@
 .meal-price {
 	font-weight: 300;
 }
+
+.meal-form {
+	width: 15%;
+	max-width: 30rem;
+}
