@@ -3,23 +3,29 @@ import ReactDOM from "react-dom";
 
 import styles from "../../styles/UI/Modal.module.css";
 
-const Backdrop = () => {
-	return <div className={styles["modal-backdrop"]} />;
+const Backdrop: React.FC<BackdropProps> = (props) => {
+	return <div className={styles["modal-backdrop"]} onClick={props.onClick} />;
 };
 
-const Overlay: React.FC<ModalProps> = (props) => {
+const Overlay: React.FC<OverlayProps> = (props) => {
 	return <div className={styles["modal-overlay"]}>{props.children}</div>;
 };
 
-interface ModalProps {
+interface BackdropProps {
+	onClick: () => void;
+}
+
+interface OverlayProps {
 	children: React.ReactNode;
 }
+
+interface ModalProps extends BackdropProps, OverlayProps {}
 
 const Modal: React.FC<ModalProps> = (props) => {
 	return (
 		<>
 			{ReactDOM.createPortal(
-				<Backdrop />,
+				<Backdrop onClick={props.onClick} />,
 				document.getElementById("modal-root")!
 			)}
 			{ReactDOM.createPortal(
