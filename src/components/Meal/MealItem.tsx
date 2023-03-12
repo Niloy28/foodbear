@@ -1,42 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Meal from "../../types/Meal";
-
-import styles from "../../styles/Meal/MealItem.module.css";
 import MealItemForm from "./MealItemForm";
 import CartContext from "../../store/CartContext";
 
+import styles from "../../styles/Meal/MealItem.module.css";
+
 const MealItem: React.FC<Meal> = (props) => {
 	const cartCtx = useContext(CartContext);
-	const [mealCount, setMealCount] = useState(0);
 
 	const addMealItemHandler = () => {
-		const meal = cartCtx.meals.find((meal) => meal.item.id === props.id);
-
-		if (meal === undefined) {
-			cartCtx.meals.push({
-				item: props,
-				quantity: 1,
-			});
-			setMealCount(1);
-		} else {
-			meal.quantity++;
-			setMealCount(meal.quantity);
-		}
+		cartCtx.addItemToCart(props);
 	};
 
 	const removeMealItemHandler = () => {
-		const meal = cartCtx.meals.find((meal) => meal.item.id === props.id);
-
-		if (meal !== undefined) {
-			meal.quantity--;
-			setMealCount(meal.quantity);
-
-			if (meal.quantity === 0) {
-				cartCtx.meals = cartCtx.meals.filter(
-					(meal) => meal.item.id !== props.id
-				);
-			}
-		}
+		cartCtx.removeItemFromCart(props);
 	};
 
 	return (
@@ -50,7 +27,11 @@ const MealItem: React.FC<Meal> = (props) => {
 			</div>
 			<div className={styles["meal-form"]}>
 				<MealItemForm
-					mealCount={mealCount}
+					mealCount={
+						cartCtx.orders.find((order) => order.item === props)
+							? cartCtx.orders.find((order) => order.item === props)!.quantity
+							: 0
+					}
 					onMealAdd={addMealItemHandler}
 					onMealRemove={removeMealItemHandler}
 				/>

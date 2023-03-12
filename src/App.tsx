@@ -1,17 +1,17 @@
-import "./App.css";
 import Header from "./components/Layout/Header";
 import Hero from "./components/Layout/Hero";
 import Meals from "./components/Meal/Meals";
+import CartContextProvider from "./store/CartContextProvider";
 
 function App() {
 	return (
-		<div className="App">
+		<CartContextProvider>
 			<Header />
 			<Hero />
 			<main>
 				<Meals />
 			</main>
-		</div>
+		</CartContextProvider>
 	);
 }
 
