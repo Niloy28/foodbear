@@ -28,8 +28,9 @@ const MealItem: React.FC<Meal> = (props) => {
 			<div className={styles["meal-form"]}>
 				<MealItemForm
 					mealCount={
-						cartCtx.orders.find((order) => order.item === props)
-							? cartCtx.orders.find((order) => order.item === props)!.quantity
+						cartCtx.orders.find((order) => order.item.id === props.id)
+							? cartCtx.orders.find((order) => order.item.id === props.id)!
+									.quantity
 							: 0
 					}
 					onMealAdd={addMealItemHandler}

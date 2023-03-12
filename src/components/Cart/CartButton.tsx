@@ -6,7 +6,6 @@ import styles from "../../styles/Cart/CartButton.module.css";
 
 interface CartButtonProps {
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
-	cartItemCount: number;
 }
 
 const CartButton: React.FC<CartButtonProps> = (props) => {
