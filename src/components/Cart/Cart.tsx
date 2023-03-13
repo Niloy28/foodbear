@@ -4,6 +4,7 @@ import Card from "../UI/Card";
 import CartContext from "../../store/CartContext";
 
 import styles from "../../styles/Cart/Cart.module.css";
+import CartItem from "./CartItem";
 
 const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 	const cartCtx = useContext(CartContext);
@@ -11,14 +12,17 @@ const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 	return (
 		<Modal onClick={props.onCloseButtonClicked}>
 			<Card className={styles["cart-modal"]}>
-				<div>Cart</div>
-				<div>
-					<ul>
+				<header className={styles["cart-header"]}>
+					<h2>Cart</h2>
+				</header>
+				<div className={styles["cart-display"]}>
+					<ul className={styles["cart-list"]}>
 						{cartCtx.orders.map((order) => (
-							<li key={order.item.id}>
-								{order.item.name}: {order.quantity}:{" "}
-								{order.item.price * order.quantity}
-							</li>
+							<CartItem
+								key={order.item.id}
+								item={order.item}
+								quantity={order.quantity}
+							/>
 						))}
 					</ul>
 				</div>

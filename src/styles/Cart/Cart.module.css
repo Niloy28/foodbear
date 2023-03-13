@@ -2,3 +2,19 @@
 	background-color: white;
 	padding: 1rem;
 }
+
+.cart-header {
+	text-align: center;
+	font-size: larger;
+	font-weight: bolder;
+	color: purple;
+}
+
+.cart-display {
+	background-color: white;
+}
+
+.cart-list {
+	margin: 0;
+	padding: 0;
+}
