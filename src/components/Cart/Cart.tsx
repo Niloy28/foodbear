@@ -5,9 +5,18 @@ import CartContext from "../../store/CartContext";
 import CartItem from "./CartItem";
 
 import styles from "../../styles/Cart/Cart.module.css";
+import Meal from "../../types/Meal";
 
 const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 	const cartCtx = useContext(CartContext);
+
+	const addItemHandler = (meal: Meal) => {
+		cartCtx.addItemToCart(meal);
+	};
+
+	const removeItemHandler = (meal: Meal) => {
+		cartCtx.removeItemFromCart(meal);
+	};
 
 	return (
 		<Modal onClick={props.onCloseButtonClicked}>
@@ -22,6 +31,8 @@ const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 								key={order.item.id}
 								item={order.item}
 								quantity={order.quantity}
+								onAddItem={addItemHandler.bind(null, order.item)}
+								onRemoveItem={removeItemHandler.bind(null, order.item)}
 							/>
 						))}
 					</ul>
