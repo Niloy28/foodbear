@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Meal from "../../types/Meal";
-
-import styles from "../../styles/Cart/CartItem.module.css";
 import Button from "../Input/Button";
 import CartContext from "../../store/CartContext";
+
+import styles from "../../styles/Cart/CartItem.module.css";
 
 interface CartItemProps {
 	item: Meal;

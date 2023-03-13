@@ -1,7 +1,7 @@
 import React from "react";
+import Button from "../Input/Button";
 
 import styles from "../../styles/Meal/MealItemForm.module.css";
-import Button from "../Input/Button";
 
 interface MealItemProps {
 	mealCount: number;

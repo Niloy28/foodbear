@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import Modal from "../UI/Modal";
 import Card from "../UI/Card";
 import CartContext from "../../store/CartContext";
+import CartItem from "./CartItem";
 
 import styles from "../../styles/Cart/Cart.module.css";
-import CartItem from "./CartItem";
 
 const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 	const cartCtx = useContext(CartContext);

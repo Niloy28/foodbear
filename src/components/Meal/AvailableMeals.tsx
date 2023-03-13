@@ -1,9 +1,9 @@
 import React from "react";
 import Meal from "../../types/Meal";
-
-import styles from "../../styles/Meal/AvailableMeals.module.css";
 import MealItem from "./MealItem";
 import Card from "../UI/Card";
+
+import styles from "../../styles/Meal/AvailableMeals.module.css";
 
 const DUMMY_MEALS: Meal[] = [
 	{
