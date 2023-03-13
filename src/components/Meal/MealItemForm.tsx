@@ -1,6 +1,7 @@
 import React from "react";
 
 import styles from "../../styles/Meal/MealItemForm.module.css";
+import Button from "../Input/Button";
 
 interface MealItemProps {
 	mealCount: number;
@@ -21,11 +22,11 @@ const MealItemForm: React.FC<MealItemProps> = (props) => {
 
 	return (
 		<form action="submit" className={styles["meal-form"]}>
-			<button onClick={mealAddHandler}>+</button>
+			<Button onClick={mealAddHandler}>+</Button>
 			{props.mealCount > 0 && (
 				<>
 					<div>{props.mealCount}</div>
-					<button onClick={mealRemoveHandler}>-</button>
+					<Button onClick={mealRemoveHandler}>-</Button>
 				</>
 			)}
 		</form>
