@@ -15,21 +15,18 @@ const CartItem: React.FC<CartItemProps> = (props) => {
 
 	const addItemHandler = () => {
 		const meal: Meal = {
-			id: props.item.id,
-			name: props.item.name,
-			description: props.item.description,
-			price: props.item.price,
+			...props.item,
 		};
+		console.log(meal);
 		cartCtx.addItemToCart(meal);
 	};
 
 	const removeItemHandler = () => {
 		const meal: Meal = {
-			id: props.item.id,
-			name: props.item.name,
-			description: props.item.description,
-			price: props.item.price,
+			...props.item,
 		};
+		console.log(meal);
+
 		cartCtx.removeItemFromCart(meal);
 	};
 
