@@ -26,7 +26,10 @@ const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 						))}
 					</ul>
 				</div>
-				<div>{cartCtx.totalPrice}</div>
+				<div className={styles["cart-total"]}>
+					<div>Total Price: </div>
+					<div>${cartCtx.totalPrice.toFixed(2)}</div>
+				</div>
 			</Card>
 		</Modal>
 	);

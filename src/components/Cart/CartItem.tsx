@@ -44,7 +44,7 @@ const CartItem: React.FC<CartItemProps> = (props) => {
 						<Button onClick={removeItemHandler}>-</Button>
 					</div>
 					<div className={styles["item-price"]}>
-						${props.item.price * props.quantity}
+						${(props.item.price * props.quantity).toFixed(2)}
 					</div>
 				</div>
 			</div>
