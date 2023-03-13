@@ -9,11 +9,23 @@ const MealItem: React.FC<Meal> = (props) => {
 	const cartCtx = useContext(CartContext);
 
 	const addMealItemHandler = () => {
-		cartCtx.addItemToCart(props);
+		const meal: Meal = {
+			id: props.id,
+			name: props.name,
+			description: props.description,
+			price: props.price,
+		};
+		cartCtx.addItemToCart(meal);
 	};
 
 	const removeMealItemHandler = () => {
-		cartCtx.removeItemFromCart(props);
+		const meal: Meal = {
+			id: props.id,
+			name: props.name,
+			description: props.description,
+			price: props.price,
+		};
+		cartCtx.removeItemFromCart(meal);
 	};
 
 	return (
