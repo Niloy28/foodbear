@@ -32,3 +32,11 @@
 	font-style: oblique;
 	font-weight: 600;
 }
+
+.order-button {
+	text-align: right;
+}
+
+.order-button button {
+	padding: 1em;
+}

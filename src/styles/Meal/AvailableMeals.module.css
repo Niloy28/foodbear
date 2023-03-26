@@ -23,3 +23,18 @@
 		transform: translateY(0);
 	}
 }
+
+.loader-spinner {
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+	margin: 1rem;
+}
+
+.error-message {
+	color: red;
+	font-size: larger;
+	font-weight: bold;
+	text-align: center;
+	padding: 2rem;
+}

@@ -29,7 +29,7 @@ const MealItem: React.FC<Meal> = (props) => {
 	};
 
 	return (
-		<li className={styles["meal-item"]}>
+		<li className={styles["meal-item"]} key={props.id}>
 			<div className={styles["meal-text"]}>
 				<h3>{props.name}</h3>
 				<section className={styles["meal-description"]}>

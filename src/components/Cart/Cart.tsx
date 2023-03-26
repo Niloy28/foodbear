@@ -6,6 +6,7 @@ import CartItem from "./CartItem";
 
 import styles from "../../styles/Cart/Cart.module.css";
 import Meal from "../../types/Meal";
+import Button from "../Input/Button";
 
 const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 	const cartCtx = useContext(CartContext);
@@ -41,6 +42,11 @@ const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 					<div>Total Price: </div>
 					<div>${cartCtx.totalPrice.toFixed(2)}</div>
 				</div>
+				{cartCtx.orders.length !== 0 && (
+					<div className={styles["order-button"]}>
+						<Button>Place Order</Button>
+					</div>
+				)}
 			</Card>
 		</Modal>
 	);
