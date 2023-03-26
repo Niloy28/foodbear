@@ -13,13 +13,13 @@ const useFetch = <T>(requestInfo: Request, transform?: (data: any) => T) => {
 			const data = (await response.json()) as T;
 			if (requestInfo.method === "GET" && transform) {
 				setData(transform(data));
+			} else {
+				setData(data);
 			}
-			setData(data);
-			setIsLoading(false);
 		} else {
-			setIsLoading(false);
 			setFetchError(response.statusText);
 		}
+		setIsLoading(false);
 	}, [requestInfo, transform]);
 
 	useEffect(() => {
