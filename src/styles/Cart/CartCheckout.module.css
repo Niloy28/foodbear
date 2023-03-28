@@ -1,0 +1,65 @@
+.header {
+	color: purple;
+	text-align: center;
+}
+
+.checkout-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.user-info-form {
+	display: flex;
+	justify-content: space-around;
+}
+
+.name-phone-form {
+	display: flex;
+	gap: 1em;
+	justify-content: space-around;
+	flex-direction: column;
+}
+
+.name-phone-form div {
+	display: flex;
+	gap: 0.5em;
+	justify-content: space-between;
+}
+
+.checkout-form div label {
+	font-size: 1.5rem;
+	font-weight: 500;
+}
+
+.checkout-form div input {
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: large;
+}
+
+.address-form {
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: large;
+	display: flex;
+	gap: 0.5rem;
+}
+
+.address-form textarea {
+	resize: none;
+	font-family: inherit;
+	font-size: 1rem;
+}
+
+.buttons {
+	margin-top: 1rem;
+	display: flex;
+	justify-content: flex-end;
+	gap: 1em;
+	margin-right: 2em;
+}
+
+.buttons button {
+	padding: 1em 2em;
+}
