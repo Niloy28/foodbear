@@ -3,6 +3,7 @@ import Button from "../Input/Button";
 import useInput from "../../hooks/use-input";
 
 import styles from "../../styles/Cart/CartCheckout.module.css";
+import UserData from "../../types/UserData";
 
 const isInputNotEmpty = (value: string) => value.trim() !== "";
 
@@ -12,7 +13,10 @@ const isEmailAdressValid = (email: string) => {
 	return expression.test(email);
 };
 
-const CartCheckout: React.FC<{ cartCheckoutCancel: () => void }> = (props) => {
+const CartCheckout: React.FC<{
+	cartCheckoutCancel: () => void;
+	onSubmit: (user: UserData) => void;
+}> = (props) => {
 	const {
 		inputValue: nameInput,
 		isInputValid: isNameValid,
@@ -65,6 +69,14 @@ const CartCheckout: React.FC<{ cartCheckoutCancel: () => void }> = (props) => {
 			resetEmail();
 			resetAddress();
 			resetPhone();
+
+			const user: UserData = {
+				name: nameInput,
+				email: emailInput,
+				address: addressInput,
+				phone: phoneInput,
+			};
+			props.onSubmit(user);
 		} else {
 			console.log("Invalid form");
 		}

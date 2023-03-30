@@ -10,11 +10,12 @@ interface CartContextProviderProps {
 enum CartActionType {
 	"ADD",
 	"REMOVE",
+	"EMPTY",
 }
 
 interface CartAction {
 	type: CartActionType;
-	payload: Meal;
+	payload?: Meal;
 }
 
 interface CartState {
@@ -37,32 +38,35 @@ const cartReducer = (state: CartState, action: CartAction) => {
 
 	switch (type) {
 		case CartActionType.ADD:
-			let order = state.orders.find((order) => order.item.id === payload.id);
+			let order = state.orders.find((order) => order.item.id === payload!.id);
 			if (order) {
-				newState.orders.find((order) => order.item.id === payload.id)!
+				newState.orders.find((order) => order.item.id === payload!.id)!
 					.quantity++;
 			} else {
-				newState.orders.push({ item: payload, quantity: 1 });
+				newState.orders.push({ item: payload!, quantity: 1 });
 			}
-			newState.totalPrice += payload.price;
+			newState.totalPrice += payload!.price;
 
 			return newState;
 
 		case CartActionType.REMOVE:
 			const newAmount = --newState.orders.find(
-				(order) => order.item.id === payload.id
+				(order) => order.item.id === payload!.id
 			)!.quantity;
 			if (newAmount === 0) {
 				newState.orders = newState.orders.filter(
-					(order) => order.item.id !== payload.id
+					(order) => order.item.id !== payload!.id
 				);
 			}
-			newState.totalPrice -= payload.price;
+			newState.totalPrice -= payload!.price;
 			if (newState.totalPrice < 0) {
 				newState.totalPrice = 0;
 			}
 
 			return newState;
+
+		case CartActionType.EMPTY:
+			return initialState;
 
 		default:
 			return state;
@@ -75,8 +79,13 @@ const CartContextProvider: React.FC<CartContextProviderProps> = (props) => {
 	const addItemHandler = (meal: Meal) => {
 		cartDispatch({ type: CartActionType.ADD, payload: meal });
 	};
+
 	const removeItemHandler = (meal: Meal) => {
 		cartDispatch({ type: CartActionType.REMOVE, payload: meal });
+	};
+
+	const emptyCartHandler = () => {
+		cartDispatch({ type: CartActionType.EMPTY });
 	};
 
 	const cartCtxValue: CartDataModel = {
@@ -84,6 +93,7 @@ const CartContextProvider: React.FC<CartContextProviderProps> = (props) => {
 		totalPrice: cartState.totalPrice,
 		addItemToCart: addItemHandler,
 		removeItemFromCart: removeItemHandler,
+		emptyCart: emptyCartHandler,
 	};
 
 	return (

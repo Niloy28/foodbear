@@ -6,6 +6,7 @@ const defaultValue: CartDataModel = {
 	totalPrice: 0,
 	addItemToCart: () => {},
 	removeItemFromCart: () => {},
+	emptyCart: () => {},
 };
 
 const CartContext = createContext<CartDataModel>(defaultValue);

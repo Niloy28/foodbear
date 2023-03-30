@@ -10,10 +10,12 @@
 
 .modal-overlay {
 	position: fixed;
-	top: 30vh;
-	left: 15%;
-	width: 70%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 50%;
 	background-color: transparent;
 	z-index: 100;
-	overflow: hidden;
+	overflow: auto;
+	scroll-behavior: smooth;
 }

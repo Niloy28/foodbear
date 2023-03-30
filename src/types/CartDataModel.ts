@@ -8,6 +8,7 @@ type CartDataModel = {
 	totalPrice: number;
 	addItemToCart: (meal: Meal) => void;
 	removeItemFromCart: (meal: Meal) => void;
+	emptyCart: () => void;
 };
 
 export default CartDataModel;
