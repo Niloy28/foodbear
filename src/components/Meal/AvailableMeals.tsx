@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Oval } from "react-loader-spinner";
 import Meal from "../../types/Meal";
 import MealItem from "./MealItem";
@@ -12,16 +12,16 @@ const MEAL_FETCH_URL = `https://ejczwaadloklsqjfqgep.supabase.co/rest/v1/foodbea
 }`;
 
 const AvailableMeals = () => {
-	const mealFetchRequest = useMemo(
-		() => new Request(MEAL_FETCH_URL),
-		[MEAL_FETCH_URL]
-	);
-
 	const {
 		isLoading,
 		data: mealData,
+		fetchData,
 		fetchError: mealFetchError,
-	} = useFetch<Meal[]>(mealFetchRequest);
+	} = useFetch<Meal[]>(MEAL_FETCH_URL);
+
+	useEffect(() => {
+		fetchData();
+	}, [fetchData]);
 
 	let displayedElem;
 	if (isLoading && !mealData) {

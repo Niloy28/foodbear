@@ -8,7 +8,11 @@ const Backdrop: React.FC<BackdropProps> = (props) => {
 };
 
 const Overlay: React.FC<OverlayProps> = (props) => {
-	return <div className={styles["modal-overlay"]}>{props.children}</div>;
+	return (
+		<div className={`${styles["modal-overlay"]} ${props.className}`}>
+			{props.children}
+		</div>
+	);
 };
 
 interface BackdropProps {
@@ -17,6 +21,7 @@ interface BackdropProps {
 
 interface OverlayProps {
 	children: React.ReactNode;
+	className?: string;
 }
 
 interface ModalProps extends BackdropProps, OverlayProps {}

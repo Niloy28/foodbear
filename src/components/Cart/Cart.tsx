@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Oval } from "react-loader-spinner";
 import Modal from "../UI/Modal";
 import Card from "../UI/Card";
@@ -10,6 +10,7 @@ import CartCheckout from "./CartCheckout";
 import UserData from "../../types/UserData";
 
 import styles from "../../styles/Cart/Cart.module.css";
+import useFetch from "../../hooks/use-fetch";
 
 type CheckoutState =
 	| "CHECKOUT"
@@ -17,8 +18,16 @@ type CheckoutState =
 	| "ORDER_SUBMITTED"
 	| "NONE";
 
+const SUPABASE_ORDER_DB_URL =
+	"https://ejczwaadloklsqjfqgep.supabase.co/rest/v1/client-orders";
+
 const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 	const [cartState, setCartState] = useState<CheckoutState>("NONE");
+	const {
+		isLoading: isSavingToDB,
+		fetchError,
+		fetchData: saveMealOrderToDB,
+	} = useFetch(SUPABASE_ORDER_DB_URL);
 	const cartCtx = useContext(CartContext);
 
 	const addItemHandler = (meal: Meal) => {
@@ -39,13 +48,39 @@ const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 	};
 
 	const submitOrderHandler = (user: UserData) => {
-		setCartState("ORDER_SUBMITTING");
-		setTimeout(() => {
-			console.log("Submitting");
-			setCartState("ORDER_SUBMITTED");
-			cartCtx.emptyCart();
-		}, 1000);
+		const orderData = {
+			username: user.name,
+			address: user.address,
+			phone: user.phone,
+			email: user.email,
+			orders: cartCtx.orders,
+		};
+
+		saveMealOrderToDB({
+			method: "POST",
+			headers: {
+				apikey: `${import.meta.env.VITE_SUPABASE_API_KEY}`,
+				Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_API_KEY}`,
+				"Content-Type": "application/json",
+				Prefer: "return=minimal",
+			},
+			body: JSON.stringify(orderData),
+		});
+
+		cartCtx.emptyCart();
 	};
+
+	useEffect(() => {
+		if (isSavingToDB) {
+			if (cartState === "CHECKOUT") {
+				setCartState("ORDER_SUBMITTING");
+			}
+		} else {
+			if (cartState === "ORDER_SUBMITTING") {
+				setCartState("ORDER_SUBMITTED");
+			}
+		}
+	}, [isSavingToDB]);
 
 	const checkoutModalContent = (
 		<>
@@ -88,13 +123,17 @@ const Cart: React.FC<{ onCloseButtonClicked: () => void }> = (props) => {
 	);
 
 	const orderSubmittingModalContent = (
-		<Card className={styles["order-submitting"]}>
-			<Oval color="purple" secondaryColor="white" />
+		<Card className={`${styles["order-common"]} ${styles["order-submitting"]}`}>
+			<Oval
+				wrapperStyle={{ display: "inherit", textAlign: "center" }}
+				color="purple"
+				secondaryColor="white"
+			/>
 		</Card>
 	);
 
 	const orderSubmittedModalContent = (
-		<Card className={styles["order-submitted"]}>
+		<Card className={`${styles["order-common"]} ${styles["order-submitted"]}`}>
 			<p>Order has been successfully completed.</p>
 		</Card>
 	);
